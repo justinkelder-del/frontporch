@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Services | Front Porch Church</title>
+
+  <style>
+    :root{
+      --text:#0f172a;
+      --muted:#475569;
+      --white:#ffffff;
+      --line:#e5e7eb;
+      --soft:#f1f5f9;
+      --shadow: 0 14px 40px rgba(15,23,42,.10);
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:#ffffff;
+      line-height:1.55;
+    }
+    a{color:inherit}
+
+    .wrap{
+      width:min(var(--max), calc(100% - 40px));
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      color:#fff;
+      padding: 22px 0 52px;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.35) 100%),
+        url("assets/group.jpg");
+      background-size:cover;
+      background-position:center;
+      transform: scale(1.02);
+    }
+    .hero > *{position:relative; z-index:2}
+
+    header{padding: 2px 0 18px}
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .brand img{
+      width:160px;
+      max-width:40vw;
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,.35));
+    }
+
+    nav{
+      display:flex;
+      gap:26px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    nav a{
+      text-decoration:none;
+      color: rgba(255,255,255,.95);
+      font-size:18px;
+      font-weight:500;
+      padding:6px 4px;
+      border-bottom:2px solid transparent;
+      transition:.15s ease;
+      white-space:nowrap;
+    }
+    nav a:hover{border-color:rgba(255,255,255,.7)}
+
+    .heroTitle{
+      margin-top: 34px;
+      max-width: 860px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:14px;
+      color: rgba(255,255,255,.88);
+      border:1px solid rgba(255,255,255,.35);
+      background: rgba(0,0,0,.18);
+      padding:8px 12px;
+      border-radius:999px;
+      backdrop-filter: blur(10px);
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 0 0 5px rgba(255,255,255,.12);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height:1.05;
+      letter-spacing:-.8px;
+      font-weight: 800;
+      text-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    .subhead{
+      margin:0;
+      font-size: clamp(17px, 2vw, 22px);
+      color: rgba(255,255,255,.9);
+      max-width: 70ch;
+      text-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+
+    /* MAIN */
+    main{padding: 42px 0 60px}
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .card{
+      background: var(--white);
+      border:1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size: 18px;
+      letter-spacing:-.2px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .sectionTitle{
+      margin: 26px 0 12px;
+      font-size: 20px;
+      letter-spacing:-.2px;
+    }
+
+    .services{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+      margin-top:12px;
+    }
+    .serviceCard{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
+      padding: 18px;
+    }
+    .serviceCard h3{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:-.2px;
+    }
+    .serviceCard p{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .pillRow{
+      margin-top:12px;
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .pill{
+      font-size:12px;
+      color: var(--muted);
+      background: var(--soft);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      text-decoration:none;
+      font-weight:800;
+      color: var(--text);
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
+      transition: transform .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.primary{
+      background: #0b1220;
+      color:#fff;
+      border-color:#0b1220;
+    }
+    .btn.soft{background: var(--soft)}
+
+    footer{
+      border-top:1px solid var(--line);
+      padding: 22px 0 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px){
+      /* Navigation becomes a floating mobile menu (see Mobile Menu block below) */
+      nav{display:none}
+      .grid2{grid-template-columns: 1fr}
+      .services{grid-template-columns: 1fr}
+    }
+
+    /* MOBILE MENU (shared across pages) */
+    .menuToggle{
+      display:none;
+      background: rgba(0,0,0,.15);
+      border: 1px solid rgba(255,255,255,.35);
+      color:#fff;
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      font-size:22px;
+      cursor:pointer;
+      backdrop-filter: blur(10px);
+      z-index:1001;
+    }
+    .overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      z-index:900;
+      pointer-events:none;
+    }
+    @media (max-width: 980px){
+      .menuToggle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+      }
+      nav{
+        display:none;
+        position:fixed;
+        top:80px;
+        right:20px;
+        width:min(320px, calc(100vw - 40px));
+        flex-direction:column;
+        gap:14px;
+        padding:20px;
+        background: rgba(15,23,42,.98);
+        backdrop-filter: blur(14px);
+        border-radius:18px;
+        border:1px solid rgba(255,255,255,.12);
+        box-shadow: 0 30px 80px rgba(0,0,0,.45);
+        z-index:1000;
+        pointer-events:auto;
+      }
+      nav a{
+        display:block;
+        font-size:18px;
+        padding:10px 8px;
+        border-bottom:1px solid rgba(255,255,255,.08);
+      }
+      nav a:last-child{border-bottom:none;}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="overlay" id="overlay" onclick="closeMenu()" aria-hidden="true"></div>
+  <section class="hero">
+    <div class="wrap">
+      <header>
+        <div class="nav">
+          <a class="brand" href="index.html" aria-label="Front Porch Church home">
+            <img src="assets/logo.jpg" alt="Front Porch Church Logo" />
+          </a>
+
+          <button class="menuToggle" id="menuToggle" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">☰</button>
+
+          <nav id="siteNav" aria-label="Primary navigation">
+            <a href="about.html">About Us</a>
+            <a href="services.html">Our Services</a>
+            <a href="team.html">Our Team</a>
+            <a href="faq.html">FAQ</a>
+            <a href="prayer.html">Prayer</a>
+            <a href="donate.html">Donate</a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="heroTitle">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> Our Services</div>
+        <h1>Simple, welcoming gatherings.</h1>
+        <p class="subhead">
+          Front Porch Church is a community for people of all abilities. Our Sunday service is designed to be clear,
+          participatory, and comfortable for those who may need movement, breaks, or extra support.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="wrap">
+      <div class="grid2">
+        <div class="card">
+          <h2>Sunday Service</h2>
+          <p>
+            <strong style="color:#0f172a">Time:</strong> Sunday • 6:00pm – 7:00pm<br/>
+            <strong style="color:#0f172a">Location:</strong> Yellow Box (Community Christian Church)<br/>
+            1635 Emerson Ln, Naperville IL 60540
+          </p>
+          <div class="ctaRow">
+            <a class="btn primary" href="https://maps.app.goo.gl/pf6dQRzfGGcxWjjf7" target="_blank" rel="noopener">Get Directions</a>
+            <a class="btn soft" href="faq.html">What to Expect</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>All Ages &amp; Abilities Welcome</h2>
+          <p>
+            People with disabilities are not just welcomed—they participate, serve, and lead alongside others.
+            If you or your child need to move, make noise, ask questions, or take breaks, that’s okay here.
+            We value interaction over perfection.
+          </p>
+          <div class="ctaRow">
+            <a class="btn" href="prayer.html">Prayer</a>
+            <a class="btn" href="team.html">Meet Our Teams</a>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="sectionTitle">What happens during a typical service?</h2>
+
+      <div class="services">
+        <div class="serviceCard">
+          <h3>Welcome &amp; Service Overview</h3>
+          <p>
+            We start with a brief host moment so everyone knows what to expect and feels comfortable as the service begins.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Clear flow</span>
+            <span class="pill">Low pressure</span>
+          </div>
+        </div>
+
+        <div class="serviceCard">
+          <h3>Otis &amp; Friends</h3>
+          <p>
+            Early on, we share a lighthearted moment that highlights some of our community’s furry friends
+            and reminds us of the joy of shared life together.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Joy</span>
+            <span class="pill">Community</span>
+          </div>
+        </div>
+
+        <div class="serviceCard">
+          <h3>Worship Through Music</h3>
+          <p>
+            We sing together and make space for prayer and reflection as we gather before God.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Participatory</span>
+            <span class="pill">All-abilities</span>
+          </div>
+        </div>
+
+        <div class="serviceCard">
+          <h3>Message / Teaching</h3>
+          <p>
+            A message from our teaching team focused on Scripture and following Jesus in everyday life.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Scripture</span>
+            <span class="pill">Growth</span>
+          </div>
+        </div>
+
+        <div class="serviceCard">
+          <h3>Announcements &amp; Offering</h3>
+          <p>
+            We share what’s happening in the life of our community and receive an offering as part of our life together.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Community rhythm</span>
+          </div>
+        </div>
+
+        <div class="serviceCard">
+          <h3>Benediction</h3>
+          <p>
+            We close by holding hands and singing a benediction—reminding us that we go out connected and sent into the week ahead.
+          </p>
+          <div class="pillRow">
+            <span class="pill">Connected</span>
+            <span class="pill">Sent</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <h2>Need help or have questions?</h2>
+        <p>
+          We’d love to connect. If there’s something specific we can do to support you or your family, please reach out.
+        </p>
+        <div class="ctaRow">
+          <a class="btn primary" href="prayer.html">Send a Prayer Request</a>
+          <a class="btn soft" href="faq.html">Read FAQ</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Front Porch Church • frontporch.life
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile menu wiring
+    const nav = document.getElementById('siteNav');
+    const overlay = document.getElementById('overlay');
+    const toggleBtn = document.getElementById('menuToggle');
+
+    function openMenu(){
+      nav.style.display = 'flex';
+      overlay.style.display = 'block';
+      overlay.style.pointerEvents = 'auto';
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.textContent = '✕';
+    }
+    function closeMenu(){
+      nav.style.display = '';
+      overlay.style.display = 'none';
+      overlay.style.pointerEvents = 'none';
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.textContent = '☰';
+    }
+    function toggleMenu(){
+      const isOpen = nav.style.display === 'flex';
+      if (isOpen) closeMenu();
+      else openMenu();
+    }
+
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 980) closeMenu();
+    });
+  </script>
+</body>
+</html>
