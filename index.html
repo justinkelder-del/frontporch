@@ -7,7 +7,6 @@
 
   <style>
     :root{
-      --white:#ffffff;
       --text:#ffffff;
       --muted: rgba(255,255,255,.9);
       --line: rgba(255,255,255,.6);
@@ -28,6 +27,7 @@
       display:flex;
       flex-direction:column;
       justify-content:flex-start;
+      overflow:hidden;
     }
 
     .hero::before{
@@ -39,6 +39,7 @@
         url("assets/group.jpg");
       background-size:cover;
       background-position:center;
+      transform: scale(1.02);
     }
 
     .wrap{
@@ -48,6 +49,7 @@
       z-index:2;
     }
 
+    /* NAV */
     header{padding:24px 0;}
 
     .nav{
@@ -55,13 +57,15 @@
       align-items:center;
       justify-content:space-between;
       gap:20px;
+      position:relative;
     }
 
     .brand img{
       width:160px;
-      max-width:40vw;
+      max-width:46vw;
       height:auto;
       display:block;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,.25));
     }
 
     nav{
@@ -80,6 +84,7 @@
       padding:6px 4px;
       border-bottom:2px solid transparent;
       transition:.15s ease;
+      white-space:nowrap;
     }
 
     nav a:hover{
@@ -98,6 +103,7 @@
       margin:0 0 16px;
       font-weight:800;
       letter-spacing:-1px;
+      text-shadow: 0 20px 60px rgba(0,0,0,.45);
     }
 
     .divider{
@@ -112,30 +118,32 @@
       font-size:clamp(20px,2vw,26px);
       line-height:1.5;
       margin:0;
-      max-width:700px;
+      max-width:720px;
       color:var(--muted);
+      text-shadow: 0 20px 60px rgba(0,0,0,.35);
     }
 
     .serviceBlock{
       margin-top:40px;
       line-height:1.6;
+      text-shadow: 0 20px 60px rgba(0,0,0,.35);
     }
 
     .serviceTime{
-      font-size:clamp(22px,2.4vw,32px); /* Increased size */
-      font-weight:700;
+      font-size:clamp(22px,2.4vw,32px);
+      font-weight:750;
       color:#ffffff;
     }
 
     .allAges{
       margin-top:8px;
       font-size:18px;
-      font-weight:600;
+      font-weight:650;
       color:rgba(255,255,255,.95);
     }
 
     .address{
-      margin-top:18px; /* Space between All Ages and address */
+      margin-top:18px;
       font-size:clamp(16px,1.4vw,18px);
       color:rgba(255,255,255,.9);
     }
@@ -157,7 +165,7 @@
       background:transparent;
       color:#fff;
       text-decoration:none;
-      font-weight:700;
+      font-weight:750;
       font-size:16px;
       transition:.15s ease;
     }
@@ -167,50 +175,97 @@
       color:#000;
     }
 
+    /* MOBILE MENU */
+    .menuToggle{
+      display:none;
+      background: rgba(0,0,0,.15);
+      border: 1px solid rgba(255,255,255,.35);
+      color:#fff;
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      font-size:22px;
+      cursor:pointer;
+      backdrop-filter: blur(10px);
+    }
+
+    .overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.45);
+      z-index:3;
+    }
+
     @media (max-width: 900px){
-      nav{ display:none; }
+      .heroContent{margin-top:56px}
       h1{ font-size:clamp(36px,8vw,60px); }
+
+      .menuToggle{ display:inline-flex; align-items:center; justify-content:center; }
+
+      nav{
+        display:none; /* hidden by default on mobile */
+        position:absolute;
+        top:60px;
+        right:0;
+        width:min(320px, calc(100vw - 40px));
+        flex-direction:column;
+        gap:14px;
+        padding:16px;
+        background: rgba(0,0,0,.92);
+        border: 1px solid rgba(255,255,255,.25);
+        border-radius:16px;
+        z-index:4;
+      }
+
+      nav a{
+        font-size:18px;
+        padding:10px 8px;
+        border-bottom:1px solid rgba(255,255,255,.12);
+      }
+      nav a:last-child{border-bottom:none}
     }
   </style>
 </head>
 
 <body>
+  <div class="overlay" id="overlay" onclick="closeMenu()" aria-hidden="true"></div>
+
   <section class="hero">
     <header>
       <div class="wrap">
         <div class="nav">
-  <a class="brand" href="index.html">
-    <img src="assets/logo.jpg" alt="Front Porch Church Logo">
-  </a>
+          <a class="brand" href="index.html" aria-label="Front Porch Church Home">
+            <img src="assets/logo.jpg" alt="Front Porch Church Logo">
+          </a>
 
-  <button class="menuToggle" onclick="toggleMenu()">☰</button>
+          <button class="menuToggle" id="menuToggle" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+            ☰
+          </button>
 
-  <nav id="mobileNav">
-    <a href="about.html">About Us</a>
-    <a href="services.html">Our Services</a>
-    <a href="team.html">Our Team</a>
-    <a href="faq.html">FAQ</a>
-    <a href="prayer.html">Prayer</a>
-    <a href="donate.html">Donate</a>
-  </nav>
-</div>
+          <nav id="siteNav" aria-label="Primary navigation">
+            <a href="about.html">About Us</a>
+            <a href="services.html">Our Services</a>
+            <a href="team.html">Our Team</a>
+            <a href="faq.html">FAQ</a>
+            <a href="prayer.html">Prayer</a>
+            <a href="donate.html">Donate</a>
+          </nav>
+        </div>
+      </div>
     </header>
 
     <div class="wrap heroContent">
       <h1>Front Porch Church</h1>
       <div class="divider"></div>
+
       <p class="subhead">
         Helping People of All Abilities Find their Way Back to God
       </p>
 
       <div class="serviceBlock">
-        <div class="serviceTime">
-          Sunday Service • 6:00pm – 7:00pm
-        </div>
-
-        <div class="allAges">
-          All Ages & Abilities Welcome
-        </div>
+        <div class="serviceTime">Sunday Service • 6:00pm – 7:00pm</div>
+        <div class="allAges">All Ages &amp; Abilities Welcome</div>
 
         <div class="address">
           Yellow Box (Community Christian Church)<br>
@@ -219,14 +274,47 @@
       </div>
 
       <div class="ctaRow">
-        <a class="btn" 
-           href="https://maps.app.goo.gl/pf6dQRzfGGcxWjjf7" 
-           target="_blank" 
+        <a class="btn"
+           href="https://maps.app.goo.gl/pf6dQRzfGGcxWjjf7"
+           target="_blank"
            rel="noopener">
-           Get Directions
+          Get Directions
         </a>
       </div>
     </div>
   </section>
+
+  <script>
+    const nav = document.getElementById('siteNav');
+    const overlay = document.getElementById('overlay');
+    const toggleBtn = document.getElementById('menuToggle');
+
+    function openMenu(){
+      nav.style.display = 'flex';
+      overlay.style.display = 'block';
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.textContent = '✕';
+    }
+
+    function closeMenu(){
+      nav.style.display = '';
+      overlay.style.display = 'none';
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.textContent = '☰';
+    }
+
+    function toggleMenu(){
+      const isOpen = nav.style.display === 'flex';
+      if (isOpen) closeMenu();
+      else openMenu();
+    }
+
+    // Close menu when switching from mobile to desktop
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) {
+        closeMenu();
+      }
+    });
+  </script>
 </body>
 </html>
