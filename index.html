@@ -384,11 +384,40 @@ function navGo(e){
   }, 80);
 }
 
-nav.querySelectorAll('a').forEach(a => {
-  a.addEventListener('click', navGo);
-  a.addEventListener('touchend', navGo, { passive: false });
-  a.addEventListener('pointerup', navGo);
-});
+// --- Mobile link navigation: wipe old handlers, then force navigation after close ---
+function wireMobileNavLinks(){
+  // 1) Strip existing listeners by cloning <a> nodes
+  const links = Array.from(nav.querySelectorAll('a'));
+  links.forEach(a => {
+    const clone = a.cloneNode(true);
+    a.parentNode.replaceChild(clone, a);
+  });
+
+  // 2) Re-select after cloning and attach ONE handler
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', function(e){
+      if (!isMobile()) return;
+
+      const href = this.getAttribute('href');
+
+      // Ignore empty/hash links
+      if (!href || href === '#' || href.startsWith('#')) return;
+
+      // Prevent the browser's default navigation (which is getting canceled)
+      e.preventDefault();
+
+      // Close menu first
+      closeMenu();
+
+      // Then navigate reliably
+      setTimeout(() => {
+        window.location.assign(href);
+      }, 120);
+    }, true); // <-- capture phase to beat other handlers
+  });
+}
+
+wireMobileNavLinks();
 
 // Close menu when switching from mobile to desktop
 window.addEventListener('resize', () => {
