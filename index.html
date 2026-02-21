@@ -61,12 +61,15 @@
     }
 
     .brand img{
-      width:160px;
-      max-width:46vw;
-      height:auto;
-      display:block;
-      filter: drop-shadow(0 12px 25px rgba(0,0,0,.25));
-    }
+  width:140px;     /* desktop size */
+  height:auto;
+}
+
+@media (max-width: 900px){
+  .brand img{
+    width:100px;   /* mobile size */
+  }
+}
 
     nav{
       display:flex;
