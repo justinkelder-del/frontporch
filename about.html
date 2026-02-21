@@ -101,6 +101,7 @@
       padding:8px 12px;
       border-radius:999px;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .dot{
       width:8px;height:8px;border-radius:999px;
@@ -208,12 +209,12 @@
     }
 
     @media (max-width: 940px){
-      /* Navigation becomes a floating mobile menu (see Mobile Menu block below) */
-      nav{display:none}
       .grid2{grid-template-columns: 1fr}
     }
 
-    /* MOBILE MENU (shared across pages) */
+    /* =========================
+       MOBILE MENU (fixed)
+    ========================== */
     .menuToggle{
       display:none;
       background: rgba(0,0,0,.15);
@@ -225,39 +226,66 @@
       font-size:22px;
       cursor:pointer;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index:1001;
     }
+
+    /* overlay is always present but does not block taps when hidden */
     .overlay{
-      display:none;
       position:fixed;
       inset:0;
       background: rgba(0,0,0,.55);
       z-index:900;
+      opacity:0;
       pointer-events:none;
+      transition: opacity .18s ease;
     }
+    .overlay.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
     @media (max-width: 940px){
       .menuToggle{
         display:inline-flex;
         align-items:center;
         justify-content:center;
       }
+
+      /* keep nav as flex, hide via opacity/pointer-events */
       nav{
-        display:none;
         position:fixed;
         top:80px;
         right:20px;
         width:min(320px, calc(100vw - 40px));
+        display:flex;
         flex-direction:column;
         gap:14px;
         padding:20px;
+
         background: rgba(15,23,42,.98);
         backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
         border-radius:18px;
         border:1px solid rgba(255,255,255,.12);
         box-shadow: 0 30px 80px rgba(0,0,0,.45);
+
         z-index:1000;
-        pointer-events:auto;
+
+        /* hidden by default */
+        opacity:0;
+        pointer-events:none;
+        transform: translateY(-6px);
+        transition: opacity .18s ease, transform .18s ease;
       }
+
+      nav.open{
+        opacity:1;
+        pointer-events:auto;
+        transform: translateY(0);
+      }
+
       nav a{
         display:block;
         font-size:18px;
@@ -270,7 +298,8 @@
 </head>
 
 <body>
-  <div class="overlay" id="overlay" onclick="closeMenu()" aria-hidden="true"></div>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
   <section class="hero">
     <div class="wrap">
       <header>
@@ -279,7 +308,13 @@
             <img src="assets/logo.jpg" alt="Front Porch Church Logo" />
           </a>
 
-          <button class="menuToggle" id="menuToggle" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">☰</button>
+          <button
+            class="menuToggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Open menu"
+            aria-controls="siteNav"
+            aria-expanded="false">☰</button>
 
           <nav id="siteNav" aria-label="Primary navigation">
             <a href="about.html">About Us</a>
@@ -377,39 +412,50 @@
     const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ADDRESS);
     document.getElementById('mapBtn').href = mapUrl;
 
-    // Mobile menu wiring
+    // Mobile menu wiring (fixed: class toggle + delayed close)
     const nav = document.getElementById('siteNav');
     const overlay = document.getElementById('overlay');
     const toggleBtn = document.getElementById('menuToggle');
 
+    function isMobile(){
+      return window.matchMedia('(max-width: 940px)').matches;
+    }
+
     function openMenu(){
-      nav.style.display = 'flex';
-      overlay.style.display = 'block';
-      overlay.style.pointerEvents = 'auto';
+      if (!isMobile()) return;
+      nav.classList.add('open');
+      overlay.classList.add('show');
       toggleBtn.setAttribute('aria-expanded', 'true');
       toggleBtn.textContent = '✕';
     }
 
     function closeMenu(){
-      nav.style.display = '';
-      overlay.style.display = 'none';
-      overlay.style.pointerEvents = 'none';
+      nav.classList.remove('open');
+      overlay.classList.remove('show');
       toggleBtn.setAttribute('aria-expanded', 'false');
       toggleBtn.textContent = '☰';
     }
 
     function toggleMenu(){
-      const isOpen = nav.style.display === 'flex';
-      if (isOpen) closeMenu();
+      if (!isMobile()) return;
+      if (nav.classList.contains('open')) closeMenu();
       else openMenu();
     }
 
-    // Close after a selection (nicer on mobile)
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    toggleBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
 
-    // Close menu when switching from mobile to desktop
+    // IMPORTANT: delay close so navigation isn't cancelled on mobile
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      if (isMobile()) setTimeout(closeMenu, 50);
+    }));
+
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 940) closeMenu();
+      if (!isMobile()) closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
     });
   </script>
 </body>
