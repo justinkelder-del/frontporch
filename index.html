@@ -187,20 +187,26 @@
       font-size:22px;
       cursor:pointer;
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index:1001;
     }
 
-    /* UPDATED OVERLAY */
+    /* OVERLAY (class-toggled, never blocks taps when hidden) */
     .overlay{
-      display:none;
       position:fixed;
       inset:0;
       background: rgba(0,0,0,.55);
       z-index:900; /* lower than the menu */
-      pointer-events:none;
+      opacity:0;
+      pointer-events:none; /* KEY */
+      transition: opacity .18s ease;
+    }
+    .overlay.show{
+      opacity:1;
+      pointer-events:auto;
     }
 
-    /* UPDATED MOBILE NAV (FLOATS ABOVE CONTENT) */
+    /* MOBILE NAV (class-toggled) */
     @media (max-width: 900px){
       .heroContent{margin-top:56px}
       h1{ font-size:clamp(36px,8vw,60px); }
@@ -212,8 +218,8 @@
       }
 
       nav{
-        display:none;                 /* hidden by default */
-        position:fixed;              /* floats above page */
+        display:flex;                  /* keep flex; hide via opacity/pointer-events instead */
+        position:fixed;
         top:80px;
         right:20px;
         width:min(320px, calc(100vw - 40px));
@@ -223,12 +229,25 @@
 
         background: rgba(15,23,42,.98);
         backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
 
         border-radius:18px;
         border:1px solid rgba(255,255,255,.12);
         box-shadow: 0 30px 80px rgba(0,0,0,.45);
 
-        z-index:1000;               /* above overlay & hero text */
+        z-index:1000;
+
+        /* hidden state */
+        opacity:0;
+        pointer-events:none;
+        transform: translateY(-6px);
+        transition: opacity .18s ease, transform .18s ease;
+      }
+
+      nav.open{
+        opacity:1;
+        pointer-events:auto;
+        transform: translateY(0);
       }
 
       nav a{
@@ -245,7 +264,7 @@
 </head>
 
 <body>
-  <div class="overlay" id="overlay" onclick="closeMenu()" aria-hidden="true"></div>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
 
   <section class="hero">
     <header>
@@ -255,7 +274,13 @@
             <img src="assets/logo.jpg" alt="Front Porch Church Logo">
           </a>
 
-          <button class="menuToggle" id="menuToggle" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false">
+          <button
+            class="menuToggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Open menu"
+            aria-controls="siteNav"
+            aria-expanded="false">
             ☰
           </button>
 
@@ -305,35 +330,54 @@
     const overlay = document.getElementById('overlay');
     const toggleBtn = document.getElementById('menuToggle');
 
+    function isMobile() {
+      return window.matchMedia('(max-width: 900px)').matches;
+    }
+
     function openMenu(){
-      nav.style.display = 'flex';
-      overlay.style.display = 'block';
-      overlay.style.pointerEvents = 'auto';
+      // Only use menu behavior on mobile
+      if (!isMobile()) return;
+      nav.classList.add('open');
+      overlay.classList.add('show');
       toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.setAttribute('aria-label', 'Close menu');
       toggleBtn.textContent = '✕';
     }
 
     function closeMenu(){
-      nav.style.display = '';
-      overlay.style.display = 'none';
-      overlay.style.pointerEvents = 'none';
+      nav.classList.remove('open');
+      overlay.classList.remove('show');
       toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.setAttribute('aria-label', 'Open menu');
       toggleBtn.textContent = '☰';
     }
 
     function toggleMenu(){
-      const isOpen = nav.style.display === 'flex';
+      if (!isMobile()) return;
+      const isOpen = nav.classList.contains('open');
       if (isOpen) closeMenu();
       else openMenu();
     }
 
-    // Close menu when switching from mobile to desktop
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 900) closeMenu();
+    toggleBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // Close after selecting a link (no preventDefault so navigation works)
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        if (isMobile()) closeMenu();
+      });
     });
 
-    // Close after a selection (nicer on mobile)
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    // Close menu when switching from mobile to desktop
+    window.addEventListener('resize', () => {
+      if (!isMobile()) closeMenu();
+    });
   </script>
 </body>
 </html>
