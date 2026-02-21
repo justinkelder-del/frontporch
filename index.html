@@ -61,6 +61,12 @@
       gap:20px;
     }
 
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      text-decoration:none;
+    }
+
     .brand img{
       width:160px;
       max-width:40vw;
@@ -72,6 +78,8 @@
       display:flex;
       gap:28px;
       flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
     }
 
     nav a{
@@ -82,6 +90,7 @@
       padding:6px 4px;
       border-bottom:2px solid transparent;
       transition:.15s ease;
+      white-space:nowrap;
     }
 
     nav a:hover{
@@ -120,12 +129,8 @@
 
     /* MOBILE */
     @media (max-width: 900px){
-      nav{
-        display:none;
-      }
-      h1{
-        font-size:clamp(36px,8vw,60px);
-      }
+      nav{ display:none; }
+      h1{ font-size:clamp(36px,8vw,60px); }
     }
   </style>
 </head>
@@ -135,17 +140,17 @@
     <header>
       <div class="wrap">
         <div class="nav">
-          <div class="brand">
+          <a class="brand" href="index.html" aria-label="Front Porch Church home">
             <img src="assets/logo.jpg" alt="Front Porch Church Logo">
-          </div>
+          </a>
 
-          <nav>
-            <a href="#about">About Us</a>
-            <a href="#services">Our Services</a>
-            <a href="#team">Our Team</a>
-            <a href="#faq">FAQ</a>
-            <a href="#prayer">Prayer</a>
-            <a href="#donate">Donate</a>
+          <nav aria-label="Primary navigation">
+            <a href="about.html">About Us</a>
+            <a href="services.html">Our Services</a>
+            <a href="team.html">Our Team</a>
+            <a href="faq.html">FAQ</a>
+            <a href="prayer.html">Prayer</a>
+            <a href="donate.html">Donate</a>
           </nav>
         </div>
       </div>
