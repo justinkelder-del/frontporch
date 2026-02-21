@@ -11,7 +11,6 @@
       --muted:#475569;
       --white:#ffffff;
       --line:#e5e7eb;
-      --soft:#f1f5f9;
       --shadow: 0 14px 40px rgba(15,23,42,.10);
       --max: 1100px;
     }
@@ -24,7 +23,6 @@
       background:#ffffff;
       line-height:1.55;
     }
-    a{color:inherit}
 
     .wrap{
       width:min(var(--max), calc(100% - 40px));
@@ -49,7 +47,6 @@
         url("assets/group.jpg");
       background-size:cover;
       background-position:center;
-      transform: scale(1.02);
     }
     .hero > *{position:relative; z-index:2}
 
@@ -83,7 +80,6 @@
       padding:6px 4px;
       border-bottom:2px solid transparent;
       transition:.15s ease;
-      white-space:nowrap;
     }
     nav a:hover{border-color:rgba(255,255,255,.7)}
 
@@ -91,31 +87,14 @@
       margin-top: 34px;
       max-width: 860px;
     }
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-size:14px;
-      color: rgba(255,255,255,.88);
-      border:1px solid rgba(255,255,255,.35);
-      background: rgba(0,0,0,.18);
-      padding:8px 12px;
-      border-radius:999px;
-      backdrop-filter: blur(10px);
-    }
-    .dot{
-      width:8px;height:8px;border-radius:999px;
-      background: rgba(255,255,255,.9);
-      box-shadow: 0 0 0 5px rgba(255,255,255,.12);
-    }
+
     h1{
       margin: 14px 0 10px;
       font-size: clamp(38px, 5vw, 64px);
-      line-height:1.05;
-      letter-spacing:-.8px;
       font-weight: 800;
       text-shadow: 0 20px 60px rgba(0,0,0,.5);
     }
+
     .subhead{
       margin:0;
       font-size: clamp(17px, 2vw, 22px);
@@ -124,65 +103,38 @@
       text-shadow: 0 20px 60px rgba(0,0,0,.45);
     }
 
-    /* MAIN */
-    main{padding: 42px 0 60px}
+    main{padding: 50px 0 60px}
 
-    .grid2{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:16px;
-      align-items:start;
-    }
-    .card{
-      background: var(--white);
-      border:1px solid var(--line);
-      border-radius: 22px;
-      box-shadow: var(--shadow);
-      padding: 18px;
-    }
-    .card h2{
-      margin:0 0 10px;
-      font-size: 18px;
-      letter-spacing:-.2px;
-    }
-    .card p{
-      margin:0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .ctaRow{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
+    .formCard{
       background:#fff;
-      text-decoration:none;
-      font-weight:800;
-      color: var(--text);
-      box-shadow: 0 10px 26px rgba(15,23,42,.06);
-      transition: transform .12s ease;
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow: var(--shadow);
+      padding: 24px;
     }
-    .btn:hover{transform: translateY(-1px)}
-    .btn.primary{
-      background: #0b1220;
-      color:#fff;
-      border-color:#0b1220;
-    }
-    .btn.soft{background: var(--soft)}
 
-    .note{
-      margin-top:12px;
-      font-size:13px;
-      color: var(--muted);
+    .formCard h2{
+      margin-top:0;
+      font-size:20px;
+    }
+
+    .formCard p{
+      color:var(--muted);
+      font-size:15px;
+    }
+
+    .formEmbed{
+      margin-top:20px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--line);
+    }
+
+    .formEmbed iframe{
+      width:100%;
+      height:1000px;
+      border:0;
+      display:block;
     }
 
     footer{
@@ -194,7 +146,7 @@
 
     @media (max-width: 940px){
       nav{display:none}
-      .grid2{grid-template-columns: 1fr}
+      .formEmbed iframe{height:1200px;}
     }
   </style>
 </head>
@@ -204,11 +156,11 @@
     <div class="wrap">
       <header>
         <div class="nav">
-          <a class="brand" href="index.html" aria-label="Front Porch Church home">
+          <a class="brand" href="index.html">
             <img src="assets/logo.jpg" alt="Front Porch Church Logo" />
           </a>
 
-          <nav aria-label="Primary navigation">
+          <nav>
             <a href="about.html">About Us</a>
             <a href="services.html">Our Services</a>
             <a href="team.html">Our Team</a>
@@ -220,7 +172,6 @@
       </header>
 
       <div class="heroTitle">
-        <div class="kicker"><span class="dot" aria-hidden="true"></span> Prayer</div>
         <h1>How can we pray for you?</h1>
         <p class="subhead">
           Share as much or as little as you’re comfortable with. You are not alone.
@@ -231,46 +182,20 @@
 
   <main>
     <div class="wrap">
-      <div class="grid2">
-        <div class="card">
-          <h2>Prayer Request Form</h2>
-          <p>
-            We would be honored to pray for you. This form is a simple way to share what’s on your heart.
-          </p>
-
-          <div class="ctaRow">
-            <a class="btn primary" href="https://forms.gle/Uv16QrcCFybkuihA6" target="_blank" rel="noopener">Open Prayer Form</a>
-            <a class="btn soft" href="faq.html">What to Expect</a>
-          </div>
-
-          <p class="note">
-            If you request follow-up, someone from our team will reach out using the contact info you provide.
-          </p>
-        </div>
-
-        <div class="card">
-          <h2>Sunday Service</h2>
-          <p>
-            <strong style="color:#0f172a">Time:</strong> Sunday • 6:00pm – 7:00pm<br/>
-            <strong style="color:#0f172a">Location:</strong> 1635 Emerson Ln, Naperville IL 60540
-          </p>
-
-          <div class="ctaRow">
-            <a class="btn soft" id="mapBtn" href="#" target="_blank" rel="noopener">Get Directions</a>
-            <a class="btn" href="about.html">About Us</a>
-          </div>
-
-          <p class="note">
-            Need to move, make noise, or take breaks? That’s okay here. We value interaction over perfection.
-          </p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:16px">
-        <h2>A simple reminder</h2>
+      <div class="formCard">
+        <h2>Front Porch Church Prayer Request</h2>
         <p>
-          Front Porch is a place where you’re known, loved, valued, and invited into deeper life with God and one another.
+          Your request will be handled with care. If you ask for follow-up,
+          someone from our team will reach out to you.
         </p>
+
+        <div class="formEmbed">
+          <iframe
+            src="https://docs.google.com/forms/d/e/1FAIpQLSdrTGs22oJcjWWQi6ntxnAxBHKynCQfgUwUZx0TWQJOOcNq4Q/viewform?embedded=true"
+            loading="lazy">
+            Loading…
+          </iframe>
+        </div>
       </div>
     </div>
   </main>
@@ -283,9 +208,6 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-    const ADDRESS = "1635 Emerson Ln, Naperville IL 60540";
-    const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ADDRESS);
-    document.getElementById('mapBtn').href = mapUrl;
   </script>
 </body>
 </html>
