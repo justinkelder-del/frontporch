@@ -357,9 +357,10 @@
   overlay.addEventListener('click', closeMenu);
 
   // Close after tapping a link (no preventDefault so navigation works)
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    if (isMobile()) closeMenu();
-  }));
+  nav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('touchend', () => { if (isMobile()) setTimeout(closeMenu, 50); }, { passive: true });
+  a.addEventListener('click', () => { if (isMobile()) setTimeout(closeMenu, 50); });
+});
 
   // Close menu when switching from mobile to desktop
   window.addEventListener('resize', () => {
