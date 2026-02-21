@@ -367,8 +367,20 @@ body.menuOpen .heroContent{
 
   // Close after tapping a link (no preventDefault so navigation works)
   nav.querySelectorAll('a').forEach(a => {
-  a.addEventListener('touchend', () => { if (isMobile()) setTimeout(closeMenu, 50); }, { passive: true });
-  a.addEventListener('click', () => { if (isMobile()) setTimeout(closeMenu, 50); });
+  a.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+
+    // Force navigation on mobile (prevents "tap does nothing" bug)
+    const href = a.getAttribute('href');
+
+    e.preventDefault();
+    closeMenu();
+
+    // Navigate after the menu starts closing
+    setTimeout(() => {
+      window.location.href = href;
+    }, 80);
+  });
 });
 
   // Close menu when switching from mobile to desktop
