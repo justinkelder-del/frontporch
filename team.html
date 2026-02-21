@@ -516,9 +516,22 @@ body.menuOpen .heroContent{
     overlay.addEventListener('click', closeMenu);
 
     // IMPORTANT: delay close so navigation isn't cancelled on mobile
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      if (isMobile()) setTimeout(closeMenu, 50);
-    }));
+   nav.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', (e) => {
+    if (!isMobile()) return;
+
+    // Force navigation on mobile (prevents "tap does nothing" bug)
+    const href = a.getAttribute('href');
+
+    e.preventDefault();
+    closeMenu();
+
+    // Navigate after the menu starts closing
+    setTimeout(() => {
+      window.location.href = href;
+    }, 80);
+  });
+});
 
     window.addEventListener('resize', () => {
       if (!isMobile()) closeMenu();
