@@ -2,981 +2,162 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Front Porch Church | frontporch.life</title>
-  <meta name="description" content="Front Porch Church — a Christian community for people of all-abilities who worship, live, work and serve together. Sundays 6:00–7:00pm in Naperville, IL." />
-
-  <meta property="og:title" content="Front Porch Church" />
-  <meta property="og:description" content="A Christian community for people of all-abilities who worship, live, work and serve together. Sundays 6:00–7:00pm." />
-  <meta property="og:type" content="website" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Front Porch Church</title>
 
   <style>
     :root{
-      --bg:#f6f8fb;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#475569;
-      --line:#e5e7eb;
-      --accent:#3b81b2;
-      --accent2:#59caec;
-      --soft:#eef6fb;
-      --soft2:#f2fbff;
-      --shadow: 0 14px 40px rgba(15,23,42,.10);
-      --radius: 18px;
-      --radius2: 24px;
-      --max: 1120px;
+      --white:#ffffff;
+      --text:#ffffff;
+      --muted: rgba(255,255,255,.9);
+      --line: rgba(255,255,255,.6);
+      --max: 1200px;
     }
 
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+      background:#000;
       color:var(--text);
+    }
+
+    /* HERO SECTION */
+    .hero{
+      min-height:100vh;
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-start;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
       background:
-        radial-gradient(800px 420px at 12% 0%, rgba(89,202,236,.22), transparent 60%),
-        radial-gradient(760px 420px at 92% 10%, rgba(59,129,178,.18), transparent 60%),
-        linear-gradient(180deg, #ffffff, var(--bg) 65%);
-      line-height:1.55;
+        linear-gradient(90deg, rgba(0,0,0,.75) 0%, rgba(0,0,0,.55) 40%, rgba(0,0,0,.35) 100%),
+        url("assets/group.jpg");
+      background-size:cover;
+      background-position:center;
     }
 
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .wrap{
+      width:min(var(--max), calc(100% - 40px));
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
 
-    /* Header */
+    /* NAVIGATION */
     header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background: rgba(255,255,255,.86);
-      backdrop-filter: blur(12px);
-      border-bottom:1px solid rgba(229,231,235,.8);
+      padding:24px 0;
     }
+
     .nav{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      padding:14px 0;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-decoration:none;
-      min-width: 240px;
-    }
-    .mark{
-      width:40px; height:40px;
-      border-radius:14px;
-      background: linear-gradient(135deg, rgba(59,129,178,.95), rgba(89,202,236,.95));
-      box-shadow: 0 10px 26px rgba(59,129,178,.20);
-      position:relative;
-      overflow:hidden;
-    }
-    .mark:after{
-      content:"";
-      position:absolute;
-      inset:-40%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 60%);
-      transform: rotate(10deg);
-    }
-    .brandTitle{display:flex; flex-direction:column; gap:2px}
-    .brandTitle strong{font-size:14px; letter-spacing:.2px}
-    .brandTitle span{font-size:12px; color:var(--muted)}
-    .links{display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end}
-    .links a{
-      text-decoration:none;
-      font-size:14px;
-      color:var(--muted);
-      padding:8px 10px;
-      border-radius:999px;
-      transition: background .12s ease, color .12s ease, transform .12s ease;
-    }
-    .links a:hover{
-      background: rgba(59,129,178,.08);
-      color: var(--text);
-      transform: translateY(-1px);
-    }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--line);
-      background:#fff;
-      text-decoration:none;
-      font-weight:800;
-      color:var(--text);
-      box-shadow: 0 10px 26px rgba(15,23,42,.06);
-      transition: transform .12s ease, background .12s ease, border-color .12s ease;
-      cursor:pointer;
-      white-space:nowrap;
-    }
-    .btn:hover{transform: translateY(-1px)}
-    .btn.primary{
-      border-color: rgba(59,129,178,.35);
-      background: linear-gradient(135deg, rgba(59,129,178,.12), rgba(89,202,236,.14));
-    }
-    .btn.soft{
-      background: var(--soft);
-      border-color: rgba(59,129,178,.18);
+      gap:20px;
     }
 
-    .menuBtn{
-      display:none;
-      width:42px; height:42px;
-      border-radius:14px;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-    .mobilePanel{
-      display:none;
-      padding:8px 0 14px;
-    }
-    .mobilePanel.open{display:block}
-    .mobilePanel a{
+    .brand img{
+      width:160px;
+      max-width:40vw;
+      height:auto;
       display:block;
-      padding:11px 12px;
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius: 14px;
-      text-decoration:none;
-      color:var(--muted);
-      margin:8px 0;
     }
 
-    /* Layout helpers */
-    section{padding:46px 0}
-    .sectionHead{display:flex; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:16px}
-    .sectionHead h2{margin:0; font-size:22px; letter-spacing:-.2px}
-    .sectionHead p{margin:6px 0 0; color:var(--muted); max-width:78ch; font-size:14px}
-
-    /* Hero */
-    .hero{padding:52px 0 22px}
-    .heroGrid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:18px;
-      align-items:stretch;
-    }
-    .heroCard{
-      border-radius: var(--radius2);
-      background: var(--card);
-      border:1px solid var(--line);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-      position:relative;
-      min-height: 420px;
-    }
-    .heroPhoto{
-      position:absolute;
-      inset:0;
-      background:
-        linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.76) 55%, rgba(255,255,255,.30)),
-        url("assets/circle.jpg");
-      background-size: cover;
-      background-position:center;
-      filter: saturate(1.03);
-    }
-    .heroContent{
-      position:relative;
-      padding:26px;
-      max-width: 680px;
-    }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:13px;
-      padding:8px 12px;
-      border-radius:999px;
-      background: var(--soft2);
-      border:1px solid rgba(89,202,236,.40);
-      color: var(--muted);
-      width: fit-content;
-    }
-    .dot{
-      width:8px; height:8px; border-radius:999px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 0 5px rgba(89,202,236,.18);
-    }
-    .headline{
-      margin:14px 0 10px;
-      font-size:44px;
-      line-height:1.04;
-      letter-spacing:-.8px;
-    }
-    .subhead{
-      margin:0;
-      color: var(--muted);
-      font-size:16px;
-      max-width: 62ch;
-    }
-    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
-    .quickFacts{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:10px;
-      margin-top:16px;
-    }
-    .fact{
-      border-radius: 16px;
-      border:1px solid var(--line);
-      background: #fff;
-      padding:12px 12px;
-    }
-    .fact b{display:block; font-size:12px; color: var(--muted); letter-spacing:.2px}
-    .fact span{display:block; margin-top:5px; font-size:14px}
-
-    /* Side card */
-    .sideStack{display:flex; flex-direction:column; gap:12px}
-    .card{
-      border-radius: var(--radius2);
-      background: var(--card);
-      border:1px solid var(--line);
-      box-shadow: var(--shadow);
-      padding:18px;
-    }
-    .card h3{margin:0 0 8px; font-size:16px}
-    .card p{margin:0; color:var(--muted); font-size:14px}
-    .card .mini{margin-top:12px; display:flex; gap:10px; flex-wrap:wrap}
-
-    /* Cards grid */
-    .grid2{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
-    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
-    .tile{
-      border-radius: var(--radius2);
-      background: var(--card);
-      border:1px solid var(--line);
-      box-shadow: 0 12px 32px rgba(15,23,42,.08);
-      padding:16px;
-    }
-    .tile h3{margin:0 0 8px; font-size:15px}
-    .tile p{margin:0; color:var(--muted); font-size:14px}
-    .tile .meta{margin-top:10px; font-size:13px; color:var(--muted)}
-
-    /* Expanders (to reduce text) */
-    details{
-      border-radius: 16px;
-      border:1px solid var(--line);
-      background: #fff;
-      padding:12px 12px;
-    }
-    details + details{margin-top:10px}
-    summary{
-      cursor:pointer;
-      font-weight:900;
-      list-style:none;
+    nav{
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    summary::-webkit-details-marker{display:none}
-    .chev{
-      width:28px; height:28px;
-      border-radius: 10px;
-      border:1px solid var(--line);
-      display:grid;
-      place-items:center;
-      background: var(--soft);
-      flex: 0 0 auto;
-      transition: transform .15s ease;
-      color: var(--muted);
-      font-weight:900;
-    }
-    details[open] .chev{transform: rotate(180deg)}
-    .detailBody{
-      color: var(--muted);
-      margin-top:10px;
-      font-size:14px;
+      gap:28px;
+      flex-wrap:wrap;
     }
 
-    /* Gallery */
-    .gallery{
-      display:grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap:12px;
-    }
-    .gItem{
-      border-radius: 18px;
-      border:1px solid var(--line);
-      background:#fff;
-      overflow:hidden;
-      box-shadow: 0 14px 40px rgba(15,23,42,.10);
-      cursor:pointer;
-      position:relative;
-      min-height: 180px;
-    }
-    .gItem img{width:100%; height:100%; object-fit:cover; display:block; transform: scale(1.01); transition: transform .18s ease}
-    .gItem:hover img{transform: scale(1.05)}
-    .gSpan6{grid-column: span 6}
-    .gSpan4{grid-column: span 4}
-    .gSpan8{grid-column: span 8}
-    .gSpan12{grid-column: span 12}
-    .gCap{
-      position:absolute;
-      left:10px; right:10px; bottom:10px;
-      border-radius: 14px;
-      padding:8px 10px;
-      background: rgba(255,255,255,.85);
-      border:1px solid rgba(229,231,235,.9);
-      color: var(--text);
-      font-size: 13px;
-      backdrop-filter: blur(10px);
+    nav a{
+      text-decoration:none;
+      color:rgba(255,255,255,.95);
+      font-size:18px;
+      font-weight:500;
+      padding:6px 4px;
+      border-bottom:2px solid transparent;
+      transition:.15s ease;
     }
 
-    /* Lightbox */
-    .lightbox{
-      position:fixed; inset:0;
-      display:none; place-items:center;
-      padding:18px;
-      background: rgba(15,23,42,.72);
-      z-index:1000;
-    }
-    .lightbox.open{display:grid}
-    .lightboxInner{
-      width:min(980px, 100%);
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.20);
-      background: rgba(255,255,255,.94);
-      overflow:hidden;
-      box-shadow: 0 18px 70px rgba(0,0,0,.35);
-    }
-    .lightboxInner img{width:100%; height:auto; display:block}
-    .lightboxBar{
-      display:flex; justify-content:space-between; align-items:center;
-      gap:10px;
-      padding:10px 12px;
-      border-top:1px solid var(--line);
-      color: var(--muted);
-      font-size: 13px;
-      background: #fff;
-    }
-    .iconBtn{
-      border:1px solid var(--line);
-      background: var(--soft);
-      border-radius: 12px;
-      padding:8px 10px;
-      cursor:pointer;
-      font-weight:900;
-      color: var(--text);
+    nav a:hover{
+      border-color:rgba(255,255,255,.7);
     }
 
-    /* Footer */
-    footer{
-      border-top:1px solid var(--line);
-      padding:26px 0 34px;
-      color: var(--muted);
+    /* HERO CONTENT */
+    .heroContent{
+      margin-top:80px;
+      max-width:900px;
     }
-    .foot{
-      display:flex; align-items:flex-start; justify-content:space-between;
-      gap:16px; flex-wrap:wrap;
-    }
-    .small{font-size:13px}
-    .legal{display:flex; gap:10px; flex-wrap:wrap; align-items:center}
-    .legal a{text-decoration:none; color: var(--muted)}
-    .legal a:hover{color: var(--text)}
-    .sep{opacity:.45}
 
-    /* Mobile */
-    @media (max-width: 980px){
-      .heroGrid{grid-template-columns: 1fr}
-      .grid2{grid-template-columns: 1fr}
-      .grid3{grid-template-columns: 1fr}
-      .headline{font-size:36px}
-      .gSpan12,.gSpan8,.gSpan6,.gSpan4{grid-column: span 12}
+    h1{
+      font-size:clamp(44px,6vw,90px);
+      line-height:1.05;
+      margin:0 0 16px;
+      font-weight:800;
+      letter-spacing:-1px;
     }
-    @media (max-width: 740px){
-      .links{display:none}
-      .menuBtn{display:inline-grid; place-items:center}
-      .quickFacts{grid-template-columns: 1fr}
+
+    .divider{
+      width:600px;
+      max-width:100%;
+      height:2px;
+      background:var(--line);
+      margin:16px 0 24px;
+    }
+
+    .subhead{
+      font-size:clamp(20px,2vw,26px);
+      line-height:1.5;
+      margin:0;
+      max-width:700px;
+      color:var(--muted);
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px){
+      nav{
+        display:none;
+      }
+      h1{
+        font-size:clamp(36px,8vw,60px);
+      }
     }
   </style>
 </head>
 
 <body>
-<header>
-  <div class="wrap">
-    <div class="nav">
-      <a class="brand" href="#top" aria-label="Front Porch Church home">
-        <div class="mark" aria-hidden="true"></div>
-        <div class="brandTitle">
-          <strong>Front Porch Church</strong>
-          <span>Helping people of all abilities find their way back to God</span>
-        </div>
-      </a>
-
-      <nav class="links" aria-label="Primary navigation">
-        <a href="#visit">Plan a Visit</a>
-        <a href="#faq">FAQ</a>
-        <a href="#team">Our Team</a>
-        <a href="#prayer">Prayer</a>
-        <a href="#donate">Donate</a>
-        <a class="btn primary" href="#contact">Get Updates / Contact</a>
-      </nav>
-
-      <button class="menuBtn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
-
-    <div class="mobilePanel" id="mobilePanel" aria-label="Mobile navigation">
-      <a href="#visit">Plan a Visit</a>
-      <a href="#faq">FAQ</a>
-      <a href="#team">Our Team</a>
-      <a href="#prayer">Prayer</a>
-      <a href="#donate">Donate</a>
-      <a href="#contact">Get Updates / Contact</a>
-    </div>
-  </div>
-</header>
-
-<main id="top">
-  <!-- HERO -->
-  <div class="wrap hero">
-    <div class="heroGrid">
-      <section class="heroCard" aria-label="Hero">
-        <div class="heroPhoto" aria-hidden="true"></div>
-        <div class="heroContent">
-          <div class="pill"><span class="dot" aria-hidden="true"></span> Sundays • 6:00–7:00pm • Naperville</div>
-          <h1 class="headline">Everyone belongs here.</h1>
-          <p class="subhead">
-            Front Porch is a Christian community for people of all abilities who worship, live, work, and serve together.
-          </p>
-
-          <div class="ctaRow">
-            <a class="btn primary" href="#visit">Plan a Visit</a>
-            <a class="btn soft" href="#donate">Donate</a>
-            <a class="btn" href="#prayer">Prayer Request</a>
+  <section class="hero">
+    <header>
+      <div class="wrap">
+        <div class="nav">
+          <div class="brand">
+            <img src="assets/logo.jpg" alt="Front Porch Church Logo">
           </div>
 
-          <div class="quickFacts" aria-label="Quick info">
-            <div class="fact">
-              <b>Service Time</b>
-              <span>Sunday • 6:00–7:00pm</span>
-            </div>
-            <div class="fact">
-              <b>Location</b>
-              <span>1635 Emerson Ln, Naperville IL 60540</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <aside class="sideStack" aria-label="Next steps">
-        <div class="card">
-          <h3>This Sunday</h3>
-          <p>
-            Inside Community Christian Church<br/>
-            <strong style="color:var(--text)">1635 Emerson Ln</strong><br/>
-            Naperville, IL 60540
-          </p>
-          <div class="mini">
-            <a class="btn" id="mapBtn" href="#" target="_blank" rel="noopener">Directions</a>
-            <a class="btn primary" href="#visit">What to Expect</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>First time visiting?</h3>
-          <p>Come as you are. Movement, noise, breaks, and questions are welcome here.</p>
-          <div class="mini">
-            <a class="btn primary" href="#faq">Read the FAQ</a>
-            <a class="btn" href="#contact">Get Updates</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Prayer</h3>
-          <p>Share as much or as little as you’re comfortable with.</p>
-          <div class="mini">
-            <a class="btn primary" id="prayerBtnSide" href="#" target="_blank" rel="noopener">Prayer Request Form</a>
-          </div>
-        </div>
-      </aside>
-    </div>
-  </div>
-
-  <!-- PLAN A VISIT -->
-  <section id="visit">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div>
-          <h2>Plan a Visit</h2>
-          <p>A simple gathering with a welcoming rhythm — so you always know what’s coming next.</p>
+          <nav>
+            <a href="#about">About Us</a>
+            <a href="#services">Our Services</a>
+            <a href="#team">Our Team</a>
+            <a href="#faq">FAQ</a>
+            <a href="#prayer">Prayer</a>
+            <a href="#donate">Donate</a>
+          </nav>
         </div>
       </div>
+    </header>
 
-      <div class="grid2">
-        <div class="tile">
-          <h3>What to expect</h3>
-          <p>Warm welcome, worship, teaching, and a community that values interaction over perfection.</p>
-          <div class="meta">All ages • All abilities • Belonging first</div>
-        </div>
-
-        <div class="tile">
-          <h3>Where we meet</h3>
-          <p>Inside Community Christian Church.</p>
-          <div class="meta"><strong style="color:var(--text)">Sundays 6:00–7:00pm</strong> • 1635 Emerson Ln, Naperville</div>
-          <div class="ctaRow" style="margin-top:12px">
-            <a class="btn" id="mapBtn2" href="#" target="_blank" rel="noopener">Open in Maps</a>
-            <a class="btn primary" href="#contact">Questions?</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Collapsible “more detail” to avoid walls of text -->
-      <div style="margin-top:14px">
-        <details>
-          <summary>
-            Service flow (quick overview)
-            <span class="chev" aria-hidden="true">⌄</span>
-          </summary>
-          <div class="detailBody">
-            Our gatherings follow a simple, welcoming rhythm: a brief host moment that walks through the flow of the service, a lighthearted
-            “Otis &amp; Friends” moment, worship through music, a message from our teaching team, announcements and offering, then we close by
-            holding hands and singing a benediction as a reminder we go out connected and sent into the week ahead.
-          </div>
-        </details>
-      </div>
+    <div class="wrap heroContent">
+      <h1>Front Porch Church</h1>
+      <div class="divider"></div>
+      <p class="subhead">
+        Helping People of All Abilities Find their Way Back to God
+      </p>
     </div>
   </section>
-
-  <!-- FAQ (Accordion via details) -->
-  <section id="faq">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div>
-          <h2>FAQ</h2>
-          <p>Clear answers for first-time visitors (and anyone who’s curious).</p>
-        </div>
-      </div>
-
-      <div class="grid2">
-        <div class="tile">
-          <h3>Belonging comes first</h3>
-          <p>Front Porch is a place to show up, be known, and grow — at your pace.</p>
-          <div class="ctaRow" style="margin-top:12px">
-            <a class="btn primary" href="#visit">Plan a Visit</a>
-            <a class="btn" href="#contact">Ask a Question</a>
-          </div>
-        </div>
-
-        <div>
-          <details>
-            <summary>Who is Front Porch Church for? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">
-              Front Porch Church is for everyone. No matter your age, background, ability, belief, or life experience. You are welcome here.
-              We believe the church is a place of belonging before anything else.
-            </div>
-          </details>
-
-          <details>
-            <summary>Is there an age range? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">
-              All ages are welcome at Front Porch Church. Children, teens, adults, and older adults are an important part of our community,
-              and we value learning and worshiping together across generations.
-            </div>
-          </details>
-
-          <details>
-            <summary>Is Front Porch accessible for people with disabilities? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">
-              Yes. Front Porch Church is an all-abilities community. People with disabilities are not just welcomed, they participate, serve,
-              and lead alongside others in the life of the church. If there is something specific you’d like us to know or a way we can better
-              support you or your family, please contact us. We’re always learning and happy to have that conversation.
-            </div>
-          </details>
-
-          <details>
-            <summary>What if I need to move, make noise, or take breaks? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">
-              That’s okay here. Front Porch values interaction over perfection. Movement, sounds, questions, and breaks are part of how people
-              engage, and you are welcome to participate in the ways that work best for you.
-            </div>
-          </details>
-
-          <details>
-            <summary>What kind of church is Front Porch? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">
-              Front Porch Church is a Christian community rooted in the life and teachings of Jesus. We are not tied to a specific denomination
-              and seek to be a welcoming place for people from a variety of church backgrounds or none at all.
-            </div>
-          </details>
-
-          <details>
-            <summary>Do I need to believe a certain way to attend? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">
-              No. You do not need to have everything figured out to belong here. Front Porch is a place for curiosity, exploration, and growth.
-              Wherever you are on your faith journey, you are welcome.
-            </div>
-          </details>
-
-          <details>
-            <summary>What should I wear? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">Come as you are. There is no dress code. We want you to feel comfortable and at home.</div>
-          </details>
-
-          <details>
-            <summary>How can I learn more? <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">
-              Contact us through the website, talk with a greeter on Sunday, or reach out to a member of our team. We’re always happy to connect.
-            </div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MISSION + VALUES (compressed) -->
-  <section id="values">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div>
-          <h2>Mission & Core Values</h2>
-          <p>Short and clear up front — with the full values available if someone wants to read them.</p>
-        </div>
-      </div>
-
-      <div class="grid2">
-        <div class="tile">
-          <h3>Our Mission</h3>
-          <p>
-            Front Porch Ministries exists as a Christian community for people of all-abilities who worship, live, work and serve together.
-          </p>
-          <div class="meta">Known • Loved • Valued • Invited into deeper life with God and one another</div>
-        </div>
-
-        <div class="tile">
-          <h3>Core Values (expand to read)</h3>
-
-          <details>
-            <summary>Read our core values <span class="chev" aria-hidden="true">⌄</span></summary>
-            <div class="detailBody">
-              <ul style="margin:0; padding-left:18px">
-                <li>We believe every person is created with inherent worth and dignity.</li>
-                <li>We believe everyone belongs, before they believe or behave.</li>
-                <li>We believe all of us carry strengths and limitations, and all of us need grace.</li>
-                <li>We believe life is meant to be shared, not lived alone.</li>
-                <li>We believe every person has something meaningful to offer the community.</li>
-                <li>We believe our community and world are richer when everyone is welcome to share their gifts and contributions/talents.</li>
-                <li>We believe we are deeply loved by Jesus Christ and reflect the image of God in unique and beautiful ways.</li>
-              </ul>
-              <div style="margin-top:10px">
-                Front Porch Church seeks to follow Jesus Christ by creating a space where people are known, loved, valued and invited into deeper
-                life with God and one another.
-              </div>
-            </div>
-          </details>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OUR TEAM (short cards) -->
-  <section id="team">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div>
-          <h2>Our Team</h2>
-          <p>Teams that help create a clear, welcoming, all-abilities worship experience each week.</p>
-        </div>
-      </div>
-
-      <div class="grid3">
-        <div class="tile">
-          <h3>A/V</h3>
-          <p>Sound, visuals, and the behind-the-scenes support that helps everyone participate.</p>
-        </div>
-
-        <div class="tile">
-          <h3>Teaching</h3>
-          <p>People across our community teaching and learning together — including some with disabilities.</p>
-        </div>
-
-        <div class="tile">
-          <h3>Worship</h3>
-          <p>An all-abilities team creating space for joy, honesty, prayer, and shared worship.</p>
-        </div>
-
-        <div class="tile">
-          <h3>Welcome</h3>
-          <p>Warm, attentive, first-friendly-faces who help everyone feel noticed and at home.</p>
-        </div>
-
-        <div class="tile">
-          <h3>Want to serve?</h3>
-          <p>Tell us what brings you joy and we’ll help you find a great fit.</p>
-          <div class="ctaRow" style="margin-top:12px">
-            <a class="btn primary" href="#contact">Get Updates / Contact</a>
-          </div>
-        </div>
-
-        <div class="tile">
-          <h3>Leadership</h3>
-          <p>Add names and photos whenever you’re ready — this section is designed to scale.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div>
-          <h2>Moments from Front Porch</h2>
-          <p>Use your photos as the heart of the page — less text, more “feel.”</p>
-        </div>
-      </div>
-
-      <div class="gallery" aria-label="Photo gallery">
-        <div class="gItem gSpan6" data-caption="Community & friendship">
-          <img src="assets/group.jpg" alt="Front Porch community photo" />
-          <div class="gCap">Community & friendship</div>
-        </div>
-        <div class="gItem gSpan6" data-caption="Worship together">
-          <img src="assets/hands.jpg" alt="Front Porch worship photo" />
-          <div class="gCap">Worship together</div>
-        </div>
-        <div class="gItem gSpan4" data-caption="Our heart">
-          <img src="assets/logo.jpg" alt="Front Porch logo or mark" />
-          <div class="gCap">Our heart</div>
-        </div>
-        <div class="gItem gSpan8" data-caption="A circle of belonging">
-          <img src="assets/logo2.jpg" alt="Front Porch circle photo" />
-          <div class="gCap">A circle of belonging</div>
-        </div>
-        <div class="gItem gSpan12" data-caption="No distractions. Only interactions.">
-          <img src="assets/circle.jpg" alt="Front Porch banner" />
-          <div class="gCap">No distractions. Only interactions.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRAYER + DONATE -->
-  <section id="prayer">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div>
-          <h2>Prayer & Support</h2>
-          <p>Two simple pathways: ask for prayer, or support the mission.</p>
-        </div>
-      </div>
-
-      <div class="grid2">
-        <div class="tile">
-          <h3>Prayer Request</h3>
-          <p>Prayer requests are collected through a Google Form. Share as much or as little as you’re comfortable with.</p>
-          <div class="ctaRow" style="margin-top:12px">
-            <a class="btn primary" id="prayerBtn" href="#" target="_blank" rel="noopener">Open Prayer Form</a>
-            <a class="btn" href="#contact">Follow up</a>
-          </div>
-        </div>
-
-        <div class="tile" id="donate">
-          <h3>Donate</h3>
-          <p>We use Overflow for giving. The link is a placeholder until you paste the real Overflow link.</p>
-          <div class="ctaRow" style="margin-top:12px">
-            <a class="btn primary" id="overflowBtn" href="#" target="_blank" rel="noopener">Give via Overflow</a>
-            <a class="btn" href="#contact">Questions?</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="sectionHead">
-        <div>
-          <h2>Get Updates / Contact</h2>
-          <p>Quick message form (opens your email app). Swap to a form tool anytime later.</p>
-        </div>
-      </div>
-
-      <div class="grid2">
-        <div class="tile">
-          <h3>Send a message</h3>
-          <form id="contactForm" style="margin-top:10px">
-            <div style="display:grid; gap:10px">
-              <label>
-                <span class="small" style="color:var(--muted)">Name</span>
-                <input id="cName" required
-                  style="width:100%; margin-top:6px; padding:12px 12px; border-radius:14px; border:1px solid var(--line); background:#fff; color:var(--text)"
-                  placeholder="Your name" />
-              </label>
-              <label>
-                <span class="small" style="color:var(--muted)">Email</span>
-                <input id="cEmail" type="email" required
-                  style="width:100%; margin-top:6px; padding:12px 12px; border-radius:14px; border:1px solid var(--line); background:#fff; color:var(--text)"
-                  placeholder="you@example.com" />
-              </label>
-              <label>
-                <span class="small" style="color:var(--muted)">Message</span>
-                <textarea id="cMsg" rows="4" required
-                  style="width:100%; margin-top:6px; padding:12px 12px; border-radius:14px; border:1px solid var(--line); background:#fff; color:var(--text)"
-                  placeholder="Questions, updates, serving opportunities, etc."></textarea>
-              </label>
-
-              <button class="btn primary" type="submit" style="width:fit-content">
-                Email Front Porch
-              </button>
-              <p id="contactStatus" class="small" style="margin:0; color:var(--muted)"></p>
-            </div>
-          </form>
-        </div>
-
-        <div class="tile">
-          <h3>Quick info</h3>
-          <p style="margin:0; color:var(--muted)">
-            Sundays <strong style="color:var(--text)">6:00–7:00pm</strong><br/>
-            1635 Emerson Ln, Naperville IL 60540<br/>
-            Website: <strong style="color:var(--text)">frontporch.life</strong>
-          </p>
-          <div class="ctaRow" style="margin-top:12px">
-            <a class="btn" id="mapBtn3" href="#" target="_blank" rel="noopener">Directions</a>
-            <a class="btn soft" href="#faq">FAQ</a>
-          </div>
-
-          <div style="margin-top:14px; border-radius: 16px; border:1px solid var(--line); background: var(--soft2); padding:12px">
-            <div style="font-weight:900">Next step (2 links)</div>
-            <div class="small" style="margin-top:6px">
-              Paste your <strong>Google Prayer Form</strong> link and <strong>Overflow</strong> link in the script and you’re fully live.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap">
-      <div class="foot">
-        <div style="display:flex; align-items:center; gap:12px">
-          <div class="mark" aria-hidden="true" style="width:34px;height:34px;border-radius:14px"></div>
-          <div>
-            <div style="font-weight:900; color:var(--text)">Front Porch Church</div>
-            <div class="small">Sundays 6:00–7:00pm • Naperville, IL</div>
-            <div class="small" style="margin-top:6px">© <span id="year"></span> frontporch.life</div>
-          </div>
-        </div>
-
-        <div class="legal small">
-          <a href="#visit">Visit</a><span class="sep">•</span>
-          <a href="#faq">FAQ</a><span class="sep">•</span>
-          <a href="#team">Team</a><span class="sep">•</span>
-          <a href="#prayer">Prayer</a><span class="sep">•</span>
-          <a href="#donate">Donate</a><span class="sep">•</span>
-          <a href="#contact">Contact</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-</main>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
-  <div class="lightboxInner" role="dialog" aria-modal="true" aria-label="Image viewer">
-    <img id="lightboxImg" alt="" />
-    <div class="lightboxBar">
-      <div id="lightboxCaption"></div>
-      <div style="display:flex; gap:8px">
-        <button class="iconBtn" id="lbPrev" type="button">Prev</button>
-        <button class="iconBtn" id="lbNext" type="button">Next</button>
-        <button class="iconBtn" id="lbClose" type="button">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-  // Mobile menu
-  const menuBtn = document.getElementById('menuBtn');
-  const mobilePanel = document.getElementById('mobilePanel');
-  menuBtn?.addEventListener('click', () => {
-    const open = mobilePanel.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-
-  // Year
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  // Set your links here
-  const GOOGLE_PRAYER_FORM_URL = "#"; // TODO: paste your Google Form URL
-  const OVERFLOW_GIVING_URL = "#";     // TODO: paste your Overflow giving link
-  const CONTACT_EMAIL = "hello@frontporch.life"; // TODO: change if needed
-
-  // Map links
-  const ADDRESS = "1635 Emerson Ln, Naperville IL 60540";
-  const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ADDRESS);
-  document.getElementById('mapBtn').href = mapUrl;
-  document.getElementById('mapBtn2').href = mapUrl;
-  document.getElementById('mapBtn3').href = mapUrl;
-
-  // Prayer + Overflow buttons
-  document.getElementById('prayerBtn').href = GOOGLE_PRAYER_FORM_URL;
-  document.getElementById('prayerBtnSide').href = GOOGLE_PRAYER_FORM_URL;
-  document.getElementById('overflowBtn').href = OVERFLOW_GIVING_URL;
-
-  // Contact form -> mailto
-  const contactForm = document.getElementById('contactForm');
-  const statusEl = document.getElementById('contactStatus');
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const name = document.getElementById('cName').value.trim();
-    const email = document.getElementById('cEmail').value.trim();
-    const msg = document.getElementById('cMsg').value.trim();
-
-    const subject = encodeURIComponent("FrontPorch.life Contact — " + name);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}\n`);
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    statusEl.textContent = "Opening your email app…";
-  });
-
-  // Gallery lightbox
-  const items = Array.from(document.querySelectorAll('.gItem'));
-  const lb = document.getElementById('lightbox');
-  const lbImg = document.getElementById('lightboxImg');
-  const lbCap = document.getElementById('lightboxCaption');
-  const lbClose = document.getElementById('lbClose');
-  const lbPrev = document.getElementById('lbPrev');
-  const lbNext = document.getElementById('lbNext');
-
-  let idx = 0;
-  function showAt(i){
-    idx = (i + items.length) % items.length;
-    const img = items[idx].querySelector('img');
-    const cap = items[idx].getAttribute('data-caption') || "";
-    lbImg.src = img.src;
-    lbImg.alt = img.alt || cap || "Front Porch photo";
-    lbCap.textContent = cap;
-  }
-  function openLightbox(i){
-    showAt(i);
-    lb.classList.add('open');
-    lb.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLightbox(){
-    lb.classList.remove('open');
-    lb.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }
-  items.forEach((it, i) => it.addEventListener('click', () => openLightbox(i)));
-  lbClose.addEventListener('click', closeLightbox);
-  lbPrev.addEventListener('click', () => showAt(idx - 1));
-  lbNext.addEventListener('click', () => showAt(idx + 1));
-  lb.addEventListener('click', (e) => { if (e.target === lb) closeLightbox(); });
-  window.addEventListener('keydown', (e) => {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') showAt(idx - 1);
-    if (e.key === 'ArrowRight') showAt(idx + 1);
-  });
-</script>
 </body>
 </html>
