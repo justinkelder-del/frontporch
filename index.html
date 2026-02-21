@@ -22,7 +22,6 @@
       color:var(--text);
     }
 
-    /* HERO SECTION */
     .hero{
       min-height:100vh;
       position:relative;
@@ -49,22 +48,14 @@
       z-index:2;
     }
 
-    /* NAVIGATION */
-    header{
-      padding:24px 0;
-    }
+    /* NAV */
+    header{padding:24px 0;}
 
     .nav{
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:20px;
-    }
-
-    .brand{
-      display:inline-flex;
-      align-items:center;
-      text-decoration:none;
     }
 
     .brand img{
@@ -90,7 +81,6 @@
       padding:6px 4px;
       border-bottom:2px solid transparent;
       transition:.15s ease;
-      white-space:nowrap;
     }
 
     nav a:hover{
@@ -127,7 +117,40 @@
       color:var(--muted);
     }
 
-    /* MOBILE */
+    .serviceLine{
+      margin-top:20px;
+      font-size:clamp(16px,1.6vw,20px);
+      color:rgba(255,255,255,.95);
+      font-weight:500;
+    }
+
+    .ctaRow{
+      margin-top:22px;
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 20px;
+      border-radius:999px;
+      border:2px solid rgba(255,255,255,.8);
+      background:transparent;
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      font-size:16px;
+      transition:.15s ease;
+    }
+
+    .btn:hover{
+      background:#fff;
+      color:#000;
+    }
+
     @media (max-width: 900px){
       nav{ display:none; }
       h1{ font-size:clamp(36px,8vw,60px); }
@@ -140,11 +163,11 @@
     <header>
       <div class="wrap">
         <div class="nav">
-          <a class="brand" href="index.html" aria-label="Front Porch Church home">
+          <a class="brand" href="index.html">
             <img src="assets/logo.jpg" alt="Front Porch Church Logo">
           </a>
 
-          <nav aria-label="Primary navigation">
+          <nav>
             <a href="about.html">About Us</a>
             <a href="services.html">Our Services</a>
             <a href="team.html">Our Team</a>
@@ -162,6 +185,20 @@
       <p class="subhead">
         Helping People of All Abilities Find their Way Back to God
       </p>
+
+      <div class="serviceLine">
+        Sunday Service • 6:00pm – 7:00pm<br>
+        Yellow Box (Community Christian Church)
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn" 
+           href="https://maps.app.goo.gl/pf6dQRzfGGcxWjjf7" 
+           target="_blank" 
+           rel="noopener">
+           Get Directions
+        </a>
+      </div>
     </div>
   </section>
 </body>
