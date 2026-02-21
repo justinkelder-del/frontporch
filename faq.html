@@ -1,0 +1,591 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ | Front Porch Church</title>
+
+  <style>
+    :root{
+      --text:#0f172a;
+      --muted:#475569;
+      --white:#ffffff;
+      --line:#e5e7eb;
+      --soft:#f1f5f9;
+      --shadow: 0 14px 40px rgba(15,23,42,.10);
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:#ffffff;
+      line-height:1.55;
+    }
+    a{color:inherit}
+
+    .wrap{
+      width:min(var(--max), calc(100% - 40px));
+      margin:0 auto;
+      position:relative;
+      }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      color:#fff;
+      padding: 22px 0 52px;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.35) 100%),
+        url("assets/group.jpg");
+      background-size:cover;
+      background-position:center;
+      transform: scale(1.02);
+    }
+    .hero > *{position:relative}
+
+    header{padding: 2px 0 18px}
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .brand img{
+      width:160px;
+      max-width:40vw;
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,.35));
+    }
+
+    nav{
+      display:flex;
+      gap:26px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    nav a{
+      text-decoration:none;
+      color: rgba(255,255,255,.95);
+      font-size:18px;
+      font-weight:500;
+      padding:6px 4px;
+      border-bottom:2px solid transparent;
+      transition:.15s ease;
+      white-space:nowrap;
+    }
+    nav a:hover{border-color:rgba(255,255,255,.7)}
+
+    .heroTitle{
+      margin-top: 34px;
+      max-width: 860px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:14px;
+      color: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      padding:8px 12px;
+      border-radius:999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 0 0 5px rgba(255,255,255,.12);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height:1.05;
+      letter-spacing:-.8px;
+      font-weight: 800;
+      text-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    .subhead{
+      margin:0;
+      font-size: clamp(17px, 2vw, 22px);
+      color: rgba(255,255,255,.9);
+      max-width: 70ch;
+      text-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+
+    /* MAIN */
+    main{padding: 42px 0 60px}
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .card{
+      background: var(--white);
+      border:1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size: 18px;
+      letter-spacing:-.2px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* FAQ details */
+    .faqCol{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+    details{
+      border:1px solid var(--line);
+      border-radius: 18px;
+      background:#fff;
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
+      padding: 12px 12px;
+    }
+    summary{
+      cursor:pointer;
+      font-weight:900;
+      list-style:none;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color: var(--text);
+    }
+    summary::-webkit-details-marker{display:none}
+    .chev{
+      width:28px; height:28px;
+      border-radius: 10px;
+      border:1px solid var(--line);
+      background: var(--soft);
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+      transition: transform .15s ease;
+      color: var(--muted);
+      font-weight:900;
+    }
+    details[open] .chev{transform: rotate(180deg)}
+    .answer{
+      margin-top:10px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      text-decoration:none;
+      font-weight:800;
+      color: var(--text);
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
+      transition: transform .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.primary{
+      background: #0b1220;
+      color:#fff;
+      border-color:#0b1220;
+    }
+    .btn.soft{background: var(--soft)}
+
+    footer{
+      border-top:1px solid var(--line);
+      padding: 22px 0 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 940px){
+      .grid2{grid-template-columns: 1fr}
+    }
+
+    /* =========================
+       MOBILE MENU (fixed)
+    ========================== */
+    .menuToggle{
+      display:none;
+      background: rgba(0,0,0,.15);
+      border: 1px solid rgba(255,255,255,.18);
+      color:#fff;
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      font-size:22px;
+      cursor:pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 6000;
+    }
+
+    /* overlay always exists; doesn't block taps when hidden */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      z-index: 900;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+    }
+    .overlay.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    @media (max-width: 940px){
+      .menuToggle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+      }
+
+      /* keep nav as flex; hide via opacity/pointer-events */
+      nav{
+        position:fixed;
+        top:80px;
+        right:20px;
+        width:min(320px, calc(100vw - 40px));
+        display:flex;
+        flex-direction:column;
+        gap:14px;
+        padding:20px;
+
+        background: #0f172a;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        border-radius:18px;
+        border: 1px solid rgba(255,255,255,.18);
+        box-shadow: 0 40px 100px rgba(0,0,0,.75);
+        z-index: 5000;
+
+        /* hidden by default */
+        opacity:0;
+        pointer-events:none;
+        transform: translateY(-6px);
+        transition: opacity .18s ease, transform .18s ease;
+      }
+
+      nav.open{
+        opacity:1;
+        pointer-events:auto;
+        transform: translateY(0);
+      }
+
+      nav a{
+        display:block;
+        font-size:18px;
+        padding:10px 8px;
+        border-bottom:1px solid rgba(255,255,255,.08);
+      }
+      nav a:last-child{border-bottom:none;}
+    }
+  /* Hide hero content when mobile menu is open */
+body.menuOpen .heroTitle,
+body.menuOpen .heroContent{
+  opacity:0;
+  pointer-events:none;
+}
+
+
+/* Ensure mobile menu receives taps */
+nav, nav *{ pointer-events:auto !important; }
+nav a{ position:relative; z-index:1; }
+
+</style>
+</head>
+
+<body>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <section class="hero">
+    <div class="wrap">
+      <header>
+        <div class="nav">
+          <a class="brand" href="index.html" aria-label="Front Porch Church home">
+            <img src="assets/logo.jpg" alt="Front Porch Church Logo" />
+          </a>
+
+          <button
+            class="menuToggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Open menu"
+            aria-controls="siteNav"
+            aria-expanded="false">☰</button>
+
+          <nav id="siteNav" aria-label="Primary navigation">
+            <a href="about.html">About Us</a>
+            <a href="services.html">Our Services</a>
+            <a href="team.html">Our Team</a>
+            <a href="faq.html">FAQ</a>
+            <a href="prayer.html">Prayer</a>
+            <a href="donate.html">Donate</a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="heroTitle">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> FAQ</div>
+        <h1>Questions are welcome here.</h1>
+        <p class="subhead">
+          Whether it’s your first time in church or you’ve been around church for years,
+          we want Front Porch to feel clear, comfortable, and welcoming.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="wrap">
+      <div class="grid2">
+        <div class="card">
+          <h2>Quick Info</h2>
+          <p>
+            <strong style="color:#0f172a">Sunday Service:</strong> 6:00pm – 7:00pm<br/>
+            <strong style="color:#0f172a">Address:</strong> 1635 Emerson Ln, Naperville IL 60540
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn soft" id="mapBtn" href="#" target="_blank" rel="noopener">Get Directions</a>
+            <a class="btn primary" href="about.html">Learn About Us</a>
+          </div>
+
+          <div class="ctaRow" style="margin-top:10px">
+            <a class="btn" href="prayer.html">Prayer</a>
+            <a class="btn" href="donate.html">Donate</a>
+          </div>
+        </div>
+
+        <div class="faqCol" aria-label="Frequently asked questions">
+          <details>
+            <summary>Who is Front Porch Church for? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              Front Porch Church is for everyone. No matter your age, background, ability, belief, or life experience. You are welcome here.
+              We believe the church is a place of belonging before anything else.
+            </div>
+          </details>
+
+          <details>
+            <summary>Is there an age range? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              All ages are welcome at Front Porch Church. Children, teens, adults, and older adults are an important part of our community,
+              and we value learning and worshiping together across generations.
+            </div>
+          </details>
+
+          <details>
+            <summary>Is Front Porch Church accessible for people with disabilities? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              Yes. Front Porch Church is an all-abilities community. People with disabilities are not just welcomed, they participate, serve,
+              and lead alongside others in the life of the church. If there is something specific you’d like us to know or a way we can better
+              support you or your family, please contact us. We’re always learning and happy to have that conversation.
+            </div>
+          </details>
+
+          <details>
+            <summary>What if my child or I need to move, make noise, or take breaks? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              That’s okay here. Front Porch Church values interaction over perfection. Movement, sounds, questions, and breaks are part of how
+              people engage, and you are welcome to participate in the ways that work best for you.
+            </div>
+          </details>
+
+          <details>
+            <summary>What kind of church is Front Porch? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              Front Porch Church is a Christian community rooted in the life and teachings of Jesus. We are not tied to a specific denomination
+              and seek to be a welcoming place for people from a variety of church backgrounds or none at all.
+            </div>
+          </details>
+
+          <details>
+            <summary>What do you believe? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              We center our faith on Jesus Christ and seek to follow Him in love, hospitality, justice, and humility. We believe faith is something
+              that grows through worship, Scripture, prayer, and shared life together, and we welcome questions along the way.
+            </div>
+          </details>
+
+          <details>
+            <summary>Do I need to believe a certain way to attend? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              No. You do not need to have everything figured out to belong here. Front Porch Church is a place for curiosity, exploration, and growth.
+              Wherever you are on your faith journey, you are welcome.
+            </div>
+          </details>
+
+          <details>
+            <summary>What should I wear? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              Come as you are. There is no dress code at Front Porch Church. We want you to feel comfortable and at home.
+            </div>
+          </details>
+
+          <details>
+            <summary>What happens during a typical service? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              Our gatherings follow a simple, welcoming rhythm. We begin with a brief host moment that walks through the flow of the service so everyone knows what to expect.
+              Early on, you’ll experience Otis &amp; Friends, a lighthearted moment that highlights some of our community’s furry friends and reminds us of the joy of shared life.
+              From there, we spend time in worship through music, followed by a message from our teaching team. We also share announcements and receive an offering as part of our life together.
+              We close each service by holding hands and singing a benediction that is a reminder that we go out connected and sent into the week ahead.
+            </div>
+          </details>
+
+          <details>
+            <summary>How can I learn more or ask additional questions? <span class="chev" aria-hidden="true">⌄</span></summary>
+            <div class="answer">
+              We’d love to hear from you. You can contact us through the website, talk with a greeter on Sunday, or reach out to a member of our team.
+              We’re always happy to connect.
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Front Porch Church • frontporch.life
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const ADDRESS = "1635 Emerson Ln, Naperville IL 60540";
+    const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ADDRESS);
+    document.getElementById('mapBtn').href = mapUrl;
+
+    // Mobile menu wiring (fixed: class toggle + delayed close so navigation works)
+    const nav = document.getElementById('siteNav');
+    const overlay = document.getElementById('overlay');
+    const toggleBtn = document.getElementById('menuToggle');
+
+    function isMobile(){
+      return window.matchMedia('(max-width: 940px)').matches;
+    }
+
+    function openMenu(){
+      if (!isMobile()) return;
+      nav.classList.add('open');
+      overlay.classList.add('show');
+      document.body.classList.add('menuOpen');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.textContent = '✕';
+    }
+
+    function closeMenu(){
+      nav.classList.remove('open');
+      overlay.classList.remove('show');
+      document.body.classList.remove('menuOpen');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.textContent = '☰';
+    }
+
+    function toggleMenu(){
+      if (!isMobile()) return;
+      if (nav.classList.contains('open')) closeMenu();
+      else openMenu();
+    }
+
+    toggleBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // IMPORTANT: delay close so navigation isn't cancelled on mobile
+
+// Mobile nav link handling (robust on iOS/Android)
+function navGo(e){
+  if (!isMobile()) return;
+  const a = e.currentTarget;
+  const href = a.getAttribute('href');
+  if (!href) return;
+
+  // Prevent the overlay/menu closing from cancelling navigation on mobile
+  e.preventDefault();
+  closeMenu();
+
+  // Navigate after menu starts closing
+  setTimeout(() => {
+    window.location.assign(href);
+  }, 80);
+}
+
+// --- Mobile link navigation: wipe old handlers, then force navigation after close ---
+function wireMobileNavLinks(){
+  // 1) Strip existing listeners by cloning <a> nodes
+  const links = Array.from(nav.querySelectorAll('a'));
+  links.forEach(a => {
+    const clone = a.cloneNode(true);
+    a.parentNode.replaceChild(clone, a);
+  });
+
+  // 2) Re-select after cloning and attach ONE handler
+  nav.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', function(e){
+      if (!isMobile()) return;
+
+      const href = this.getAttribute('href');
+
+      // Ignore empty/hash links
+      if (!href || href === '#' || href.startsWith('#')) return;
+
+      // Prevent the browser's default navigation (which is getting canceled)
+      e.preventDefault();
+
+      // Close menu first
+      closeMenu();
+
+      // Then navigate reliably
+      setTimeout(() => {
+        window.location.assign(href);
+      }, 120);
+    }, true); // <-- capture phase to beat other handlers
+  });
+}
+
+wireMobileNavLinks();
+    window.addEventListener('resize', () => {
+      if (!isMobile()) closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  </script>
+</body>
+</html>
