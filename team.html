@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Our Team | Front Porch Church</title>
+
+  <style>
+    :root{
+      --text:#0f172a;
+      --muted:#475569;
+      --white:#ffffff;
+      --line:#e5e7eb;
+      --soft:#f1f5f9;
+      --shadow: 0 14px 40px rgba(15,23,42,.10);
+      --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background:#ffffff;
+      line-height:1.55;
+    }
+    a{color:inherit}
+
+    .wrap{
+      width:min(var(--max), calc(100% - 40px));
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      color:#fff;
+      padding: 22px 0 52px;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.78) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.35) 100%),
+        url("assets/group.jpg");
+      background-size:cover;
+      background-position:center;
+      transform: scale(1.02);
+    }
+    .hero > *{position:relative; z-index:2}
+
+    header{padding: 2px 0 18px}
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
+    .brand img{
+      width:160px;
+      max-width:40vw;
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 12px 25px rgba(0,0,0,.35));
+    }
+
+    nav{
+      display:flex;
+      gap:26px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
+    }
+    nav a{
+      text-decoration:none;
+      color: rgba(255,255,255,.95);
+      font-size:18px;
+      font-weight:500;
+      padding:6px 4px;
+      border-bottom:2px solid transparent;
+      transition:.15s ease;
+      white-space:nowrap;
+    }
+    nav a:hover{border-color:rgba(255,255,255,.7)}
+
+    .heroTitle{
+      margin-top: 34px;
+      max-width: 860px;
+    }
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      font-size:14px;
+      color: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      padding:8px 12px;
+      border-radius:999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .dot{
+      width:8px;height:8px;border-radius:999px;
+      background: rgba(255,255,255,.9);
+      box-shadow: 0 0 0 5px rgba(255,255,255,.12);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height:1.05;
+      letter-spacing:-.8px;
+      font-weight: 800;
+      text-shadow: 0 20px 60px rgba(0,0,0,.5);
+    }
+    .subhead{
+      margin:0;
+      font-size: clamp(17px, 2vw, 22px);
+      color: rgba(255,255,255,.9);
+      max-width: 70ch;
+      text-shadow: 0 20px 60px rgba(0,0,0,.45);
+    }
+
+    /* MAIN */
+    main{padding: 42px 0 60px}
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+      align-items:start;
+    }
+    .card{
+      background: var(--white);
+      border:1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h2{
+      margin:0 0 10px;
+      font-size: 18px;
+      letter-spacing:-.2px;
+    }
+    .card p{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .teams{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:16px;
+      margin-top:16px;
+    }
+    .teamCard{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
+      padding: 18px;
+    }
+    .teamTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:10px;
+    }
+    .teamCard h3{
+      margin:0;
+      font-size: 16px;
+      letter-spacing:-.2px;
+    }
+    .badge{
+      font-size:12px;
+      color: var(--muted);
+      background: var(--soft);
+      border:1px solid var(--line);
+      padding:6px 10px;
+      border-radius:999px;
+      white-space:nowrap;
+    }
+    .teamCard p{
+      margin:0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#fff;
+      text-decoration:none;
+      font-weight:800;
+      color: var(--text);
+      box-shadow: 0 10px 26px rgba(15,23,42,.06);
+      transition: transform .12s ease;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn.primary{
+      background: #0b1220;
+      color:#fff;
+      border-color:#0b1220;
+    }
+    .btn.soft{background: var(--soft)}
+
+    footer{
+      border-top:1px solid var(--line);
+      padding: 22px 0 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 940px){
+      .grid2{grid-template-columns: 1fr}
+      .teams{grid-template-columns: 1fr}
+    }
+
+    /* =========================
+       MOBILE MENU (fixed)
+    ========================== */
+    .menuToggle{
+      display:none;
+      background: rgba(0,0,0,.15);
+      border: 1px solid rgba(255,255,255,.18);
+      color:#fff;
+      width:44px;
+      height:44px;
+      border-radius:12px;
+      font-size:22px;
+      cursor:pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index:1001;
+    }
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,.55);
+      z-index:900;
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .18s ease;
+    }
+    .overlay.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    @media (max-width: 940px){
+      .menuToggle{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+      }
+
+      /* keep nav flex; hide via opacity/pointer-events */
+      nav{
+        position:fixed;
+        top:80px;
+        right:20px;
+        width:min(320px, calc(100vw - 40px));
+        display:flex;
+        flex-direction:column;
+        gap:14px;
+        padding:20px;
+
+        background: #0f172a;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+
+        border-radius:18px;
+        border: 1px solid rgba(255,255,255,.18);
+        box-shadow: 0 40px 100px rgba(0,0,0,.75);
+
+        z-index:1000;
+
+        /* hidden by default */
+        opacity:0;
+        pointer-events:none;
+        transform: translateY(-6px);
+        transition: opacity .18s ease, transform .18s ease;
+      }
+
+      nav.open{
+        opacity:1;
+        pointer-events:auto;
+        transform: translateY(0);
+      }
+
+      nav a{
+        display:block;
+        font-size:18px;
+        padding:10px 8px;
+        border-bottom:1px solid rgba(255,255,255,.08);
+      }
+      nav a:last-child{border-bottom:none;}
+    }
+  /* Hide hero content when mobile menu is open */
+body.menuOpen .heroTitle,
+body.menuOpen .heroContent{
+  opacity:0;
+  pointer-events:none;
+}
+
+</style>
+</head>
+
+<body>
+  <div class="overlay" id="overlay" aria-hidden="true"></div>
+
+  <section class="hero">
+    <div class="wrap">
+      <header>
+        <div class="nav">
+          <a class="brand" href="index.html" aria-label="Front Porch Church home">
+            <img src="assets/logo.jpg" alt="Front Porch Church Logo" />
+          </a>
+
+          <button
+            class="menuToggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Open menu"
+            aria-controls="siteNav"
+            aria-expanded="false">☰</button>
+
+          <nav id="siteNav" aria-label="Primary navigation">
+            <a href="about.html">About Us</a>
+            <a href="services.html">Our Services</a>
+            <a href="team.html">Our Team</a>
+            <a href="faq.html">FAQ</a>
+            <a href="prayer.html">Prayer</a>
+            <a href="donate.html">Donate</a>
+          </nav>
+        </div>
+      </header>
+
+      <div class="heroTitle">
+        <div class="kicker"><span class="dot" aria-hidden="true"></span> Our Team</div>
+        <h1>Many gifts. One community.</h1>
+        <p class="subhead">
+          Front Porch is built by an all-abilities community of people who serve side-by-side to create a clear,
+          welcoming worship experience each week.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="wrap">
+      <div class="grid2">
+        <div class="card">
+          <h2>How we serve</h2>
+          <p>
+            Our teams are designed so everyone can participate meaningfully. Whether you love tech, hospitality, music,
+            teaching, or simply helping people feel at home—there’s a place for you here.
+          </p>
+          <div class="ctaRow">
+            <a class="btn primary" href="#join">Join a Team</a>
+            <a class="btn soft" href="faq.html">What to Expect</a>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Quick Info</h2>
+          <p>
+            <strong style="color:#0f172a">Sunday Service:</strong> 6:00pm – 7:00pm<br/>
+            <strong style="color:#0f172a">Address:</strong> 1635 Emerson Ln, Naperville IL 60540
+          </p>
+          <div class="ctaRow">
+            <a class="btn soft" id="mapBtn" href="#" target="_blank" rel="noopener">Get Directions</a>
+            <a class="btn" href="about.html">About Us</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="teams" style="margin-top:18px">
+        <div class="teamCard">
+          <div class="teamTop">
+            <h3>A/V Team</h3>
+            <span class="badge">Sound • Visuals • Tech</span>
+          </div>
+          <p>
+            The AV Team supports a clear and engaging worship experience by managing sound, visuals, and technical elements
+            during our gatherings. Working behind the scenes, they help create an environment where people can fully
+            participate in worship, teaching, and the community atmosphere of our service.
+          </p>
+        </div>
+
+        <div class="teamCard">
+          <div class="teamTop">
+            <h3>Teaching Team</h3>
+            <span class="badge">Scripture • Learning</span>
+          </div>
+          <p>
+            The Teaching Team includes people from across our church community, including some with disabilities, who serve
+            by teaching and learning alongside others. Together, they help create welcoming, faith-filled spaces where
+            Scripture is explored and everyone is encouraged to grow.
+          </p>
+        </div>
+
+        <div class="teamCard">
+          <div class="teamTop">
+            <h3>Worship Team</h3>
+            <span class="badge">Music • Prayer</span>
+          </div>
+          <p>
+            The Worship Team is an all-abilities team made up of people from our church community who help lead us in
+            singing, prayer, and reflection. Together, they create space for joy, honesty, and shared worship as we gather
+            before God.
+          </p>
+        </div>
+
+        <div class="teamCard">
+          <div class="teamTop">
+            <h3>Welcome Team</h3>
+            <span class="badge">Hospitality • Care</span>
+          </div>
+          <p>
+            The Welcome Team are often the first friendly faces people see at Front Porch Church. With warmth and
+            attentiveness, they help everyone feel noticed, welcomed, and at home, whether it’s your first visit or your
+            hundredth.
+          </p>
+        </div>
+      </div>
+
+      <div class="card" id="join" style="margin-top:16px">
+        <h2>Join a Team</h2>
+        <p>
+          Want to serve? Tell us what you enjoy and we’ll help you find a great fit.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="join-team.html">Join a Team</a>
+          <a class="btn soft" href="prayer.html">Prayer</a>
+          <a class="btn" href="donate.html">Donate</a>
+        </div>
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="about.html">Get Connected</a>
+        <a class="btn soft" href="prayer.html">Prayer</a>
+        <a class="btn" href="donate.html">Donate</a>
+      </div>
+
+      <p style="margin-top:10px; color:var(--muted); font-size:13px">
+        (When you’re ready, we can swap “Get Connected” for a real contact form or an email link.)
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      © <span id="year"></span> Front Porch Church • frontporch.life
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const ADDRESS = "1635 Emerson Ln, Naperville IL 60540";
+    const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(ADDRESS);
+    document.getElementById('mapBtn').href = mapUrl;
+
+    // Mobile menu wiring (fixed: class toggle + delayed close so navigation works)
+    const nav = document.getElementById('siteNav');
+    const overlay = document.getElementById('overlay');
+    const toggleBtn = document.getElementById('menuToggle');
+
+    function isMobile(){
+      return window.matchMedia('(max-width: 940px)').matches;
+    }
+
+    function openMenu(){
+      if (!isMobile()) return;
+      nav.classList.add('open');
+      overlay.classList.add('show');
+      document.body.classList.add('menuOpen');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      toggleBtn.textContent = '✕';
+    }
+
+    function closeMenu(){
+      nav.classList.remove('open');
+      overlay.classList.remove('show');
+      document.body.classList.remove('menuOpen');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      toggleBtn.textContent = '☰';
+    }
+
+    function toggleMenu(){
+      if (!isMobile()) return;
+      if (nav.classList.contains('open')) closeMenu();
+      else openMenu();
+    }
+
+    toggleBtn.addEventListener('click', toggleMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    // IMPORTANT: delay close so navigation isn't cancelled on mobile
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      if (isMobile()) setTimeout(closeMenu, 50);
+    }));
+
+    window.addEventListener('resize', () => {
+      if (!isMobile()) closeMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+  </script>
+</body>
+</html>
